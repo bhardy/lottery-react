@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import combinations from './combinations'
+import combinations from '../helpers/combinations'
+
+import '../css/Teams.css'
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -97,6 +99,13 @@ export default class Teams extends Component {
     const teamListItems = teams.map((team) =>
       <li className="team__list-item" key={team.name}>
         {team.name}: {team.percent}%
+        <ul className="team-combo__list">
+          {team.combos.map((combo) =>
+            <li className="team-combo__list-item" key={combo.join('-')}>
+              {combo.join(', ')}
+            </li>
+          )}
+        </ul>
       </li>
     )
 

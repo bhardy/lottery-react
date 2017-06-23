@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import '../css/Board.css'
+
 /*
 Board creates the checkboxes for the balls
 
@@ -17,6 +19,7 @@ function Ball(props) {
       className="ball"
       onClick={props.onClick}
       checked={props.check}
+      disabled={props.check}
     />
   );
 }
@@ -34,7 +37,7 @@ export default class Board extends Component {
 
   render() {
     const listItems = this.props.Balls.map((value, index) =>
-      <li className="team-list-item" key={index}>{this.renderBall(index)}</li>
+      <li className="ball__list-item" key={index}>{this.renderBall(index)}</li>
     )
 
     return (
