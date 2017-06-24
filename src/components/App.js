@@ -3,6 +3,7 @@ import { find, cloneDeep } from 'lodash'
 import Board from './Board'
 import Winner from './Winner'
 import Teams from './Teams'
+import Undo from './Undo'
 import createTeams from '../helpers/createTeams'
 
 import '../css/App.css'
@@ -20,17 +21,15 @@ class App extends Component {
   }
 
   handleClick(i) {
-    const historyIndex = this.state.history.length - 1;
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[historyIndex];
-    const Balls = current.Balls.slice();
-    Balls[i] = true;
+    const current = this.state.history[this.state.history.length - 1]
+    const Balls = cloneDeep(current.Balls)
+    Balls[i] = true
 
     const teams = cloneDeep(current.teams)
     let updatePercents = false
 
     Balls.forEach(function(value, index) {
-      if (value === true) {
+      if (value) {
         updatePercents = true
         let ball = index + 1
 
@@ -51,20 +50,21 @@ class App extends Component {
       }
     }
 
-
     this.setState({
-      history: history.concat([{
-        Balls,
-        teams
-      }]),
-      stepNumber: history.length,
+      history: [...this.state.history, { Balls, teams }],
+      stepNumber: this.state.history.length,
     });
   }
 
-  jumpTo(step) {
+  jumpTo(stepNumber) {
+    this.setState({ stepNumber })
+  }
+
+  handleUndo() {
     this.setState({
-      stepNumber: step,
-    });
+      history: this.state.history.slice(0, this.state.history.length - 1),
+      stepNumber: this.state.stepNumber -1
+    })
   }
 
   render() {
@@ -86,6 +86,7 @@ class App extends Component {
       <Board
         Balls={current.Balls}
         onClick={(i) => this.handleClick(i)}
+        disableAll={this.state.stepNumber < this.state.history.length - 1}
       />
     )
 
@@ -96,19 +97,16 @@ class App extends Component {
     return (
       <div className="game">
         <div className="game-board">
-            {boardNode}
+          {boardNode}
         </div>
         <div className="game-info">
           <ol>{moves}</ol>
         </div>
+        { this.state.stepNumber ? <Undo onClick={() => this.handleUndo()} /> : null}
         <Teams {...current} />
       </div>
     );
   }
-}
-
-function calculateWinner (balls) {
-  return null
 }
 
 export default App;

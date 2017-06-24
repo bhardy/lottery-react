@@ -10,10 +10,11 @@
 
 .ball__list-item {
   position: relative;
+  padding-top: 50%;
   counter-increment: ball;
 }
 
-.ball {
+.ball__label {
   position: absolute;
   top: 0;
   right: 0;
@@ -24,6 +25,10 @@
   align-items: center;
 }
 
-.ball::before {
+.ball__label::before {
   content: counter(ball);
+}
+
+.ball__checkbox {
+
 }

@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import numeral from 'numeral'
 
-import combinations from '../helpers/combinations'
-import createTeams from '../helpers/createTeams'
-
 import '../css/Teams.css'
 
 export default class Teams extends Component {

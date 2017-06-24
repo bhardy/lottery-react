@@ -13,32 +13,31 @@ Board creates the checkboxes for the balls
 
 function Ball(props) {
   return (
-    <input
-      name={props.index}
-      type="checkbox"
-      className="ball"
-      onClick={props.onClick}
-      checked={props.check}
-      disabled={props.check}
-    />
+    <label className="ball__label">
+      <input
+        name={props.index}
+        type="checkbox"
+        className="ball__checkbox"
+        onClick={props.onClick}
+        checked={props.check}
+        disabled={props.check || props.disabled}
+      />
+    </label>
   );
 }
 
 export default class Board extends Component {
-  renderBall (i) {
-    return (
-      <Ball
-        index={i}
-        check={this.props.Balls[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-
   render() {
-    const listItems = this.props.Balls.map((value, index) =>
-      <li className="ball__list-item" key={index}>{this.renderBall(index)}</li>
-    )
+    const listItems = this.props.Balls.map((value, index) => (
+      <li className="ball__list-item" key={index}>
+        <Ball
+          index={index}
+          check={this.props.Balls[index]}
+          onClick={() => this.props.onClick(index)}
+          disabled={this.props.disableAll}
+        />
+      </li>
+    ))
 
     return (
       <ol className="ball__list">
