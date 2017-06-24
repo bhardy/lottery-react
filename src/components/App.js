@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-
+import { find, cloneDeep } from 'lodash'
 import Board from './Board'
+import Winner from './Winner'
 import Teams from './Teams'
+import createTeams from '../helpers/createTeams'
 
 import '../css/App.css'
 
@@ -10,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       history: [{
+        teams: createTeams(),
         Balls: Array(14).fill(false)
       }],
       stepNumber: 0,
@@ -17,16 +20,42 @@ class App extends Component {
   }
 
   handleClick(i) {
+    const historyIndex = this.state.history.length - 1;
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
+    const current = history[historyIndex];
     const Balls = current.Balls.slice();
-    // if (calculateWinner(Balls) || Balls[i]) {
-    //   return;
-    // }
     Balls[i] = true;
+
+    const teams = cloneDeep(current.teams)
+    let updatePercents = false
+
+    Balls.forEach(function(value, index) {
+      if (value === true) {
+        updatePercents = true
+        let ball = index + 1
+
+        for (let team of teams) {
+          team.combos = team.combos.filter((combo) => combo.includes(ball))
+        }
+      }
+    })
+
+    if (updatePercents) {
+      let remainingCombos = 0;
+      for (let team of teams) {
+        remainingCombos += team.combos.length
+      }
+
+      for (let team of teams) {
+        team.percent = team.combos.length / remainingCombos
+      }
+    }
+
+
     this.setState({
       history: history.concat([{
-        Balls: Balls
+        Balls,
+        teams
       }]),
       stepNumber: history.length,
     });
@@ -41,8 +70,6 @@ class App extends Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.Balls);
-    // const winner = calculateWinner(history);
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -55,28 +82,26 @@ class App extends Component {
       );
     });
 
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Pull Another';
+    let boardNode = (
+      <Board
+        Balls={current.Balls}
+        onClick={(i) => this.handleClick(i)}
+      />
+    )
+
+    if (this.state.stepNumber === 4) {
+      boardNode = <Winner name={find(current.teams, t => t.percent === 1).name} />
     }
 
     return (
       <div className="game">
         <div className="game-board">
-          <Board
-            Balls={current.Balls}
-            onClick={(i) => this.handleClick(i)}
-          />
+            {boardNode}
         </div>
         <div className="game-info">
-          <div>{status}</div>
           <ol>{moves}</ol>
         </div>
-        <Teams
-          Balls={current.Balls}
-        />
+        <Teams {...current} />
       </div>
     );
   }
