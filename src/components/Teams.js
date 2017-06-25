@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import numeral from 'numeral'
+import classnames from 'classnames'
 
 import '../css/Teams.css'
 
-export default class Teams extends Component {
-  render() {
-    let teams = this.props.teams
+class Team extends Component {
+  constructor() {
+    super()
+    this.state = {opened: false};
+  }
 
-    const teamListItems = teams.map((team) =>
-      <li className="team__list-item" key={team.name}>
-        {team.name}: {numeral(team.percent).format('0.0%')}
-        <ul className="team-combo__list">
-          {team.combos.map((combo) =>
+  render() {
+    return (
+      <li
+        className="team__list-item"
+        onClick={()=> this.setState({ opened: !this.state.opened})}>
+
+        {this.props.name}: {numeral(this.props.percent).format('0.0%')}
+
+        <ul className={classnames('team-combo__list', {
+          'team-combo__list--opened': this.state.opened
+        })}>
+          {this.props.combos.map((combo) =>
             <li className="team-combo__list-item" key={combo.join('-')}>
               {combo.join(', ')}
             </li>
@@ -19,10 +29,19 @@ export default class Teams extends Component {
         </ul>
       </li>
     )
+  }
+}
+
+export default class Teams extends Component {
+  render() {
+    let teams = this.props.teams
+
+    const teamListItems = teams.map((team) =>
+      <Team name={team.name} percent={team.percent} combos={team.combos} key={team.name}/>
+    )
 
     return (
       <div className="teams">
-        <h2>Odds</h2>
         <ul className="team__list">
           {teamListItems}
         </ul>

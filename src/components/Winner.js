@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Confetti from 'react-confetti'
+import '../css/Winner.css'
 
 class Winner extends Component {
   render () {
-    return <h2>Winner <em><marquee>{this.props.name}</marquee></em></h2>
+    return (
+      <div className="winner">
+        <h2 className="winner__heading"><marquee>{this.props.name}</marquee></h2>
+        <Confetti style={{'top': '-1px'}}/>
+      </div>
+    )
   }
 }
 

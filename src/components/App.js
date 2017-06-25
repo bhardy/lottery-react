@@ -76,34 +76,32 @@ class App extends Component {
       'Pull #' + move :
         'Game start';
       return (
-        <li key={move}>
+        <li className="game-info__list-item" key={move}>
           <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
         </li>
       );
     });
 
-    let boardNode = (
-      <Board
-        Balls={current.Balls}
-        onClick={(i) => this.handleClick(i)}
-        disableAll={this.state.stepNumber < this.state.history.length - 1}
-      />
-    )
-
+    let winnerNode
     if (this.state.stepNumber === 4) {
-      boardNode = <Winner name={find(current.teams, t => t.percent === 1).name} />
+       winnerNode = <Winner name={find(current.teams, t => t.percent === 1).name} />
     }
 
     return (
       <div className="game">
+        { winnerNode }
         <div className="game-board">
-          {boardNode}
+          <Board
+            Balls={current.Balls}
+            onClick={(i) => this.handleClick(i)}
+            disableAll={this.state.stepNumber < this.state.history.length - 1}
+          />
         </div>
+        <Teams {...current} />
         <div className="game-info">
-          <ol>{moves}</ol>
+          <ol className="game-info__list">{moves}</ol>
         </div>
         { this.state.stepNumber ? <Undo onClick={() => this.handleUndo()} /> : null}
-        <Teams {...current} />
       </div>
     );
   }

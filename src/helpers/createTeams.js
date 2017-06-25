@@ -15,9 +15,9 @@ export default function createTeams() {
     {
       name: "Communist Youth",
       percent: 300
-    },
+    }
     {
-      name: "Big Shiny Goons",
+      name: "Big Shiny goons",
       percent: 220
     },
     {
@@ -26,7 +26,7 @@ export default function createTeams() {
     },
     {
       name: "Backes to the Future",
-      percent: 110
+      percent: 115
     },
     {
       name: "Wu Tanguay Clan",
@@ -34,7 +34,7 @@ export default function createTeams() {
     },
     {
       name: "MackysBedtimePlayers (via Oduya Halak Boyes)",
-      percent: 60
+      percent: 55
     },
     {
       name: "Timbersnakes (via Diana Krall-Stars)",
@@ -45,7 +45,7 @@ export default function createTeams() {
       percent: 30
     },
     {
-      name: "Redraw",
+      name: "Re-draw",
       percent: 1
     }
   ]

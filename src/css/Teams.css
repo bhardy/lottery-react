@@ -1,3 +1,26 @@
+.team__list {
+  padding: 30px;
+  margin: 0;
+  list-style-type: none;
+}
+
+.team__list-item {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.team__list-item:hover {
+  cursor: pointer;
+}
+
 .team-combo__list {
   display: none;
+}
+
+.team-combo__list--opened {
+  display: block;
+}
+
+.teams {
+  width: 40%;
 }

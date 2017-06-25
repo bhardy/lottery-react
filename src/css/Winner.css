@@ -1,0 +1,8 @@
+.winner__heading {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  font-size: 50px;
+  font-style: italic;
+}

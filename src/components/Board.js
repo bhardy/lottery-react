@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames'
 
 import '../css/Board.css'
 
@@ -13,7 +14,9 @@ Board creates the checkboxes for the balls
 
 function Ball(props) {
   return (
-    <label className="ball__label">
+    <label className={classnames('ball__label', {
+      'ball__label--active': props.check
+    })}>
       <input
         name={props.index}
         type="checkbox"
