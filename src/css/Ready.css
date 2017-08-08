@@ -1,0 +1,19 @@
+.ready-hint {
+  margin: var(--border-offset) calc(-1 * var(--border-offset));
+}
+
+.ready-hint__list {
+  padding: 30px var(--border-offset) 30px calc(2 * var(--border-offset));
+  margin: 0;
+  border: 2px dashed #ff4136;
+}
+
+.ready-hint__list:empty {
+  display: none;
+}
+
+.ready-button {
+  width: 100%;
+  height: 46px;
+  font-weight: bold;
+}
