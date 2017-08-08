@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 import classnames from 'classnames'
 
 import '../css/Board.css'
@@ -12,11 +12,13 @@ Board creates the checkboxes for the balls
   />
 */
 
-function Ball(props) {
+function Ball (props) {
   return (
-    <label className={classnames('ball__label', {
-      'ball__label--active': props.check
-    })}>
+    <label
+      className={classnames('ball__label', {
+        'ball__label--active': props.check
+      })}
+    >
       <input
         name={props.index}
         type="checkbox"
@@ -26,12 +28,12 @@ function Ball(props) {
         disabled={props.check || props.disabled}
       />
     </label>
-  );
+  )
 }
 
 export default class Board extends Component {
-  render() {
-    const listItems = this.props.Balls.map((value, index) => (
+  render () {
+    const listItems = this.props.Balls.map((value, index) =>
       <li className="ball__list-item" key={index}>
         <Ball
           index={index}
@@ -40,12 +42,12 @@ export default class Board extends Component {
           disabled={this.props.disableAll}
         />
       </li>
-    ))
+    )
 
     return (
       <ol className="ball__list">
         {listItems}
       </ol>
-    );
+    )
   }
 }

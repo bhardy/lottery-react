@@ -1,0 +1,6 @@
+.setup {
+  padding: 30px 50px;
+  background-color: white;
+
+  --border-offset: 20px;
+}

@@ -1,0 +1,49 @@
+.create-teams {
+  font-size: 18px;
+}
+
+.create-teams__list {
+  padding: 0;
+  margin: 30px 0;
+  list-style-type: none;
+}
+
+.create-teams__list-item {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.create-teams__team-name {
+  margin-right: auto;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.create-teams__team-percent {
+  margin-right: 10px;
+}
+
+.create-teams__form {
+  padding: 30px var(--border-offset);
+  margin-right: calc(-1 * var(--border-offset));
+  margin-left: calc(-1 * var(--border-offset));
+  background-color: #f9f9f9;
+}
+
+.create-teams__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.create-teams__submit {
+  display: block;
+  width: 100%;
+}
+
+.create-teams__input {
+  margin-left: 20px;
+}
