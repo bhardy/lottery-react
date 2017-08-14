@@ -14,13 +14,13 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      teams: [],
+      // teams: [],
       // Debug Set
-      // teams: [
-      //   {name: 'dustin', percent: 500},
-      //   {name: 'derrick', percent: 400},
-      //   {name: 'brant', percent: 100}
-      // ],
+      teams: [
+        {name: 'dustin', percent: 500},
+        {name: 'derrick', percent: 400},
+        {name: 'brant', percent: 100}
+      ],
       setup: true,
       stepNumber: 0
     }
@@ -152,7 +152,7 @@ class App extends Component {
         <div className="site-content">
           <div className="game">
             {winnerNode}
-            <h1>Draw</h1>
+            <h1 className="game-heading">Draw</h1>
             <div className="game-board">
               <Board
                 Balls={current.Balls}

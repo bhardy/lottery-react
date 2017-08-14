@@ -1,8 +1,14 @@
-.winner__heading {
-  position: absolute;
-  top: -30px;
-  left: 0;
+.winner {
+  z-index: 1;
+  display: flex;
+  grid-column: 1 / span 12;
+  grid-row: 1 / span 2;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  font-size: 50px;
-  font-style: italic;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.winner__heading {
+  font-size: 100px;
 }
