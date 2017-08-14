@@ -6,20 +6,51 @@ body {
   box-sizing: border-box;
 }
 
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  color: #111111;
+  background-color: #383838;
+}
+
+
 /* These should be in a new file! */
 .game {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 50px;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(12, 1fr);
+  width: 100%;
+  padding: 30px 50px;
+  margin: 5%;
+  background-color: white;
+}
+
+.game-heading {
+  grid-column: 1 / span 12;
+  grid-row: 1;
 }
 
 .game-board {
-  width: 60%;
-  padding: 30px;
+  grid-column: 1 / span 8;
+  grid-row: 2;
+}
+
+.teams {
+  grid-column: 10 / span 3;
+  grid-row: 2;
 }
 
 .game-info {
-  width: 100%;
+  grid-column: 1 / span 12;
+  grid-row: 3;
 }
 
 .game-info__list {
@@ -31,6 +62,7 @@ body {
   margin-right: 20px;
 }
 
-.winner {
-  width: 100%;
+.game-undo {
+  grid-column: 10 / span 3;
+  grid-row: 3;
 }
