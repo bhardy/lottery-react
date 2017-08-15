@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import numeral from 'numeral'
+import slugify from '../helpers/slugify'
+
 // import classnames from 'classnames'
 
 import '../css/Setup.css'
-import '../css/CreateTeams.css'
+import '../css/AddTeams.css'
 
 class TeamListItem extends Component {
   constructor () {
@@ -15,16 +17,16 @@ class TeamListItem extends Component {
 
   render () {
     return (
-      <li className="create-teams__list-item">
-        <span className="create-teams__team-name">
+      <li className="add-teams__list-item">
+        <span className="add-teams__team-name">
           {this.props.name}
         </span>
-        <span className="create-teams__team-percent">
+        <span className="add-teams__team-percent">
           {numeral(this.props.percent / 1000).format('0.0%')}
         </span>
         <button
           onClick={() => this.props.remove(this.props.name)}
-          className="create-teams__team-remove"
+          className="add-teams__team-remove"
         >
           Remove
         </button>
@@ -34,7 +36,7 @@ class TeamListItem extends Component {
 }
 
 function Empty () {
-  return <li className="create-teams__list-item--empty">Add some teams</li>
+  return <li className="add-teams__list-item--empty">Add some teams</li>
 }
 
 class AddTeam extends Component {
@@ -52,25 +54,21 @@ class AddTeam extends Component {
 
   render () {
     return (
-      <form
-        className="create-teams__form"
-        ref="teamForm"
-        onSubmit={this.createTeam.bind(this)}
-      >
-        <label className="create-teams__label">
+      <form className="add-teams__form" ref="teamForm" onSubmit={this.createTeam.bind(this)}>
+        <label className="add-teams__label">
           Team Name
           <input
-            className="create-teams__input"
+            className="add-teams__input"
             ref="name"
             type="text"
             placeholder="Team 1"
             required
           />
         </label>
-        <label className="create-teams__label">
+        <label className="add-teams__label">
           Percentage
           <input
-            className="create-teams__input"
+            className="add-teams__input"
             ref="percentage"
             type="number"
             step=".1"
@@ -80,7 +78,7 @@ class AddTeam extends Component {
             required
           />
         </label>
-        <button className="create-teams__submit" type="submit">
+        <button className="add-teams__submit" type="submit">
           Add Team
         </button>
       </form>
@@ -88,7 +86,7 @@ class AddTeam extends Component {
   }
 }
 
-export default class CreateTeams extends Component {
+export default class AddTeams extends Component {
   render () {
     let teams = this.props.Teams
 
@@ -96,14 +94,14 @@ export default class CreateTeams extends Component {
       <TeamListItem
         name={team.name}
         percent={team.percent}
-        key={team.name}
+        key={slugify(team.name)}
         remove={this.props.removeTeam}
       />
     )
 
     return (
       <div className="create-teams">
-        <ul className="create-teams__list">
+        <ul className="add-teams__list">
           {teamListItems.length > 0 ? teamListItems : <Empty />}
         </ul>
         <AddTeam onSubmit={this.props.addTeam} />
