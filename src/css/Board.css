@@ -1,9 +1,10 @@
 .ball__list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   padding: 0;
   margin: 0;
   list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+
   grid-gap: 50px;
   grid-auto-rows: minmax(50px, auto);
 }
@@ -14,23 +15,23 @@
 }
 
 .ball__label {
-  border: 4px solid gray;
-  width: 100%;
-  display: block;
-  padding-top: 100%;
-  border-radius: 50%;
   position: relative;
+  display: block;
+  width: 100%;
+  padding-top: 100%;
+  border: 4px solid gray;
+  border-radius: 50%;
   box-sizing: content-box;
 }
 
-.ball__label::before {
-  content: counter(ball);
+.ball__label:before {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
   font-size: 46px;
   font-weight: bold;
+  content: counter(ball);
+  transform: translate(-50%,-50%);
 }
 
 .ball__label:not(.ball__label--active) {

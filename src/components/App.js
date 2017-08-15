@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import {find, cloneDeep, reject} from 'lodash'
 import Board from './Board'
 import Winner from './Winner'
-import CreateTeams from './CreateTeams'
+import AddTeams from './AddTeams'
 import Ready from './Ready'
 import Teams from './Teams'
 import Undo from './Undo'
 import createTeams from '../helpers/createTeams'
+import slugify from '../helpers/slugify'
 
 import '../css/App.css'
 
@@ -14,13 +15,13 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      // teams: [],
+      teams: [],
       // Debug Set
-      teams: [
-        {name: 'dustin', percent: 500},
-        {name: 'derrick', percent: 400},
-        {name: 'brant', percent: 100}
-      ],
+      // teams: [
+      //   {name: 'dustin', percent: 500},
+      //   {name: 'derrick', percent: 400},
+      //   {name: 'brant', percent: 100}
+      // ],
       setup: true,
       stepNumber: 0
     }
@@ -76,7 +77,7 @@ class App extends Component {
   addTeam (team) {
     let teams = this.state.teams
 
-    if (find(teams, {name: team.name})) {
+    if (find(teams, o => slugify(o.name) === slugify(team.name))) {
       alert('You cannot add 2 teams with the same name')
     } else {
       teams.push(team)
@@ -117,7 +118,7 @@ class App extends Component {
         <div className="site-content">
           <div className="setup">
             <h1>Setup</h1>
-            <CreateTeams
+            <AddTeams
               Teams={this.state.teams}
               addTeam={e => this.addTeam(e)}
               removeTeam={e => this.removeTeam(e)}
@@ -143,9 +144,7 @@ class App extends Component {
 
       let winnerNode
       if (this.state.stepNumber === 4) {
-        winnerNode = (
-          <Winner name={find(current.teams, t => t.percent === 1000).name} />
-        )
+        winnerNode = <Winner name={find(current.teams, t => t.percent === 1000).name} />
       }
 
       return (
@@ -157,9 +156,7 @@ class App extends Component {
               <Board
                 Balls={current.Balls}
                 onClick={i => this.handleClick(i)}
-                disableAll={
-                  this.state.stepNumber < this.state.history.length - 1
-                }
+                disableAll={this.state.stepNumber < this.state.history.length - 1}
               />
             </div>
             <Teams {...current} />
@@ -168,9 +165,7 @@ class App extends Component {
                 {moves}
               </ol>
             </div>
-            {this.state.stepNumber
-              ? <Undo onClick={() => this.handleUndo()} />
-              : null}
+            {this.state.stepNumber ? <Undo onClick={() => this.handleUndo()} /> : null}
           </div>
         </div>
       )

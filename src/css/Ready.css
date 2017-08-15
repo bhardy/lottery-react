@@ -12,6 +12,10 @@
   display: none;
 }
 
+.ready-hint__list-item:not(:last-of-type) {
+  margin-bottom: 10px;
+}
+
 .ready-button {
   width: 100%;
   height: 46px;
