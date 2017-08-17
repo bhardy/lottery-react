@@ -13,15 +13,18 @@ class Team extends Component {
   render () {
     return (
       <li
-        className="team__list-item"
+        className={classnames('team__list-item', {
+          'team__list-item--opened': this.state.opened
+        })}
         onClick={() => this.setState({opened: !this.state.opened})}
       >
-        {this.props.name}: {numeral(this.props.percent / 1000).format('0.0%')}
-        <ul
-          className={classnames('team-combo__list', {
-            'team-combo__list--opened': this.state.opened
-          })}
-        >
+        <span className="team__name">
+          {this.props.name}
+        </span>
+        <span className="team__percent">
+          {numeral(this.props.percent / 1000).format('0.0%')}
+        </span>
+        <ul className="team-combo__list">
           {this.props.combos.map(combo =>
             <li className="team-combo__list-item" key={combo.join('-')}>
               {combo.join(', ')}

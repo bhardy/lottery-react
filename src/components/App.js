@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {find, cloneDeep, reject} from 'lodash'
+import classnames from 'classnames'
 import Board from './Board'
 import Winner from './Winner'
 import AddTeams from './AddTeams'
@@ -15,13 +16,14 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      teams: [],
+      // teams: [],
       // Debug Set
-      // teams: [
-      //   {name: 'dustin', percent: 500},
-      //   {name: 'derrick', percent: 400},
-      //   {name: 'brant', percent: 100}
-      // ],
+      teams: [
+        {name: 'dustin', percent: 500},
+        {name: 'derrick', percent: 400},
+        {name: 'darlisa', percent: 70},
+        {name: 'brant', percent: 30}
+      ],
       setup: true,
       stepNumber: 0
     }
@@ -80,15 +82,14 @@ class App extends Component {
     if (find(teams, o => slugify(o.name) === slugify(team.name))) {
       alert('You cannot add 2 teams with the same name')
     } else {
-      teams.push(team)
-
       this.setState({
-        teams: teams
+        teams: [...teams, team]
       })
     }
   }
 
   removeTeam (team) {
+    // TODO: is this mutating?
     let teams = this.state.teams
     teams = reject(teams, {name: team})
 
@@ -98,14 +99,11 @@ class App extends Component {
   }
 
   startGame () {
-    let teams = this.state.teams
-    teams = createTeams(teams)
-
     this.setState({
       setup: false,
       history: [
         {
-          teams: teams,
+          teams: createTeams(this.state.teams),
           Balls: Array(14).fill(false)
         }
       ]
@@ -135,7 +133,10 @@ class App extends Component {
         const desc = move ? 'Pull #' + move : 'Game start'
         return (
           <li className="game-info__list-item" key={move}>
-            <button onClick={() => this.jumpTo(move)}>
+            <button
+              className="cool-button game-info__button"
+              onClick={() => this.jumpTo(move)}
+            >
               {desc}
             </button>
           </li>
@@ -144,11 +145,17 @@ class App extends Component {
 
       let winnerNode
       if (this.state.stepNumber === 4) {
-        winnerNode = <Winner name={find(current.teams, t => t.percent === 1000).name} />
+        winnerNode = (
+          <Winner name={find(current.teams, t => t.percent === 1000).name} />
+        )
       }
 
       return (
-        <div className="site-content">
+        <div
+          className={classnames('site-content', {
+            'site-content--game': !this.state.setup
+          })}
+        >
           <div className="game">
             {winnerNode}
             <h1 className="game-heading">Draw</h1>
@@ -156,16 +163,23 @@ class App extends Component {
               <Board
                 Balls={current.Balls}
                 onClick={i => this.handleClick(i)}
-                disableAll={this.state.stepNumber < this.state.history.length - 1}
+                disableAll={
+                  this.state.stepNumber < this.state.history.length - 1
+                }
               />
             </div>
             <Teams {...current} />
-            <div className="game-info">
+            <nav className="game-info">
+              <h2 className="game-info__heading">Step</h2>
               <ol className="game-info__list">
                 {moves}
               </ol>
-            </div>
-            {this.state.stepNumber ? <Undo onClick={() => this.handleUndo()} /> : null}
+            </nav>
+            <nav className="game-controls">
+              {this.state.stepNumber
+                ? <Undo onClick={() => this.handleUndo()} />
+                : null}
+            </nav>
           </div>
         </div>
       )

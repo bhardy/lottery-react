@@ -1,11 +1,15 @@
-.ready-hint {
+.ready {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   margin: var(--border-offset) calc(-1 * var(--border-offset));
 }
 
 .ready-hint__list {
   padding: 30px var(--border-offset) 30px calc(2 * var(--border-offset));
   margin: 0;
-  border: 2px dashed #ff4136;
+  color: var(--red);
+  border: 2px dashed;
 }
 
 .ready-hint__list:empty {
@@ -17,7 +21,11 @@
 }
 
 .ready-button {
-  width: 100%;
-  height: 46px;
-  font-weight: bold;
+  padding: var(--input-padding) calc(var(--input-padding) * 2);
+  font-weight: normal;
+  color: white;
+  background-color: var(--blue);
+  border-right: 3px solid;
+  border-bottom: 4px solid;
+  border-color: var(--black);
 }

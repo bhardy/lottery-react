@@ -19,8 +19,8 @@
   display: block;
   width: 100%;
   padding-top: 100%;
-  border: 4px solid gray;
   border-radius: 50%;
+  box-shadow: inset 0 0 0 4px #111111;
   box-sizing: content-box;
 }
 
@@ -30,6 +30,7 @@
   left: 50%;
   font-size: 46px;
   font-weight: bold;
+  color: var(--blue);
   content: counter(ball);
   transform: translate(-50%,-50%);
 }
@@ -39,7 +40,7 @@
 }
 
 .ball__label--active {
-  background-color: gold;
+  background-color: var(--gold);
 }
 
 .ball__checkbox {
