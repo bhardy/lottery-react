@@ -10,6 +10,7 @@
 
 .add-teams__list-item {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
@@ -22,13 +23,15 @@
 
 .add-teams__team-percent {
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .add-teams__form {
   padding: 30px var(--border-offset);
   margin-right: calc(-1 * var(--border-offset));
   margin-left: calc(-1 * var(--border-offset));
-  background-color: #f9f9f9;
+  color: var(--white);
+  background-color: var(--blue);
 }
 
 .add-teams__label {
@@ -42,8 +45,20 @@
 .add-teams__submit {
   display: block;
   width: 100%;
+  padding: var(--input-padding);
+  color: var(--black);
+  background-color: var(--white);
+  border-right: 3px solid;
+  border-bottom: 4px solid;
 }
 
 .add-teams__input {
+  padding: var(--input-padding);
   margin-left: 20px;
+  background-color: var(--white);
+  border: 0;
+}
+
+.add-teams__team-remove {
+  color: var(--red);
 }

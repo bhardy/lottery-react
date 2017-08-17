@@ -28,7 +28,8 @@ class TeamListItem extends Component {
           onClick={() => this.props.remove(this.props.name)}
           className="add-teams__team-remove"
         >
-          Remove
+          ✖
+          <span className="sr-only">Remove</span>
         </button>
       </li>
     )
@@ -56,7 +57,7 @@ class AddTeam extends Component {
     return (
       <form className="add-teams__form" ref="teamForm" onSubmit={this.createTeam.bind(this)}>
         <label className="add-teams__label">
-          Team Name
+          <span className="add-teams__hint">Team Name</span>
           <input
             className="add-teams__input"
             ref="name"
@@ -66,7 +67,7 @@ class AddTeam extends Component {
           />
         </label>
         <label className="add-teams__label">
-          Percentage
+          <span className="add-teams__hint">Percentage</span>
           <input
             className="add-teams__input"
             ref="percentage"
