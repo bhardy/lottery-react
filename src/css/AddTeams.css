@@ -60,5 +60,6 @@
 }
 
 .add-teams__team-remove {
+  font-weight: bold;
   color: var(--red);
 }
