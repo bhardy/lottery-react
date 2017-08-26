@@ -24,6 +24,7 @@
   width: 100%;
   padding: 30px 50px;
   margin: 5%;
+  overflow: hidden;
   background-color: var(--white);
 }
 
@@ -73,11 +74,18 @@
 }
 
 .game-controls {
+  display: flex;
   grid-column: 10 / span 3;
   grid-row: 3;
   align-self: end;
+  justify-content: flex-end;
 }
 
 .game-undo.cool-button {
+  background-color: var(--orange);
+}
+
+.game-restart.cool-button {
+  margin-left: 20px;
   background-color: var(--red);
 }

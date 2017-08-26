@@ -7,6 +7,7 @@ import AddTeams from './AddTeams'
 import Ready from './Ready'
 import Teams from './Teams'
 import Undo from './Undo'
+import Restart from './Restart'
 import createTeams from '../helpers/createTeams'
 import slugify from '../helpers/slugify'
 
@@ -110,6 +111,14 @@ class App extends Component {
     })
   }
 
+  restartGame () {
+    this.setState({
+      setup: true,
+      stepNumber: 0,
+      teams: reject(this.state.teams, {name: 're-draw'})
+    })
+  }
+
   render () {
     if (this.state.setup) {
       return (
@@ -170,7 +179,7 @@ class App extends Component {
             </div>
             <Teams {...current} />
             <nav className="game-info">
-              <h2 className="game-info__heading">Step</h2>
+              <h2 className="game-info__heading">Game Stage</h2>
               <ol className="game-info__list">
                 {moves}
               </ol>
@@ -179,6 +188,7 @@ class App extends Component {
               {this.state.stepNumber
                 ? <Undo onClick={() => this.handleUndo()} />
                 : null}
+              <Restart onClick={() => this.restartGame()} />
             </nav>
           </div>
         </div>
