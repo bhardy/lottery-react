@@ -20,9 +20,10 @@
 .game {
   position: relative;
   display: grid;
-  grid-template-rows: auto;
   grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
   width: 100%;
+  max-width: 1600px;
   padding: 30px 50px;
   margin: 5%;
   overflow: hidden;
@@ -32,6 +33,8 @@
 .game-heading {
   grid-column: 1 / span 12;
   grid-row: 1;
+  color: var(--orange);
+  text-align: center;
 }
 
 .game-board {
@@ -44,19 +47,19 @@
   grid-row: 2;
 }
 
-.game-info {
+.game-stage {
   display: grid;
   grid-column: 1 / span 8;
   grid-row: 3;
   margin-top: 20px;
 }
 
-.game-info__heading {
+.game-stage__heading {
   grid-column: 1 / span 12;
   grid-row: 1;
 }
 
-.game-info__list {
+.game-stage__list {
   grid-column: 1 / span 8;
   grid-row: 2;
   padding: 0;
@@ -64,29 +67,42 @@
   list-style-type: none;
 }
 
-.game-info__list-item {
+.game-stage__list-item {
   display: inline-block;
   margin-right: 20px;
 }
 
-.game-info__button.cool-button {
+.game-stage__button.cool-button {
   color: var(--black);
   background-color: var(--gold);
 }
 
 .game-controls {
-  display: flex;
   grid-column: 10 / span 3;
   grid-row: 3;
   align-self: end;
-  justify-content: flex-end;
+}
+
+.game-controls__heading {
+}
+
+.game-controls__list {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 .game-undo.cool-button {
+  margin-right: 20px;
   background-color: var(--orange);
 }
 
+.game-undo.cool-button:focus {
+  outline-color: var(--red);
+}
+
 .game-restart.cool-button {
-  margin-left: 20px;
   background-color: var(--red);
 }

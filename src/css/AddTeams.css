@@ -42,19 +42,16 @@
   margin-bottom: 15px;
 }
 
-.add-teams__submit {
-  display: block;
+.cool-button.add-teams__submit {
   width: 100%;
-  padding: var(--input-padding);
   color: var(--black);
   background-color: var(--white);
-  border-right: 3px solid;
-  border-bottom: 4px solid;
 }
 
 .add-teams__input {
   padding: var(--input-padding);
   margin-left: 20px;
+  text-align: right;
   background-color: var(--white);
   border: 0;
 }

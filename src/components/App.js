@@ -141,9 +141,9 @@ class App extends Component {
       const moves = history.map((step, move) => {
         const desc = move ? 'Pull #' + move : 'Game start'
         return (
-          <li className="game-info__list-item" key={move}>
+          <li className="game-stage__list-item" key={move}>
             <button
-              className="cool-button game-info__button"
+              className="cool-button game-stage__button"
               onClick={() => this.jumpTo(move)}
             >
               {desc}
@@ -167,8 +167,9 @@ class App extends Component {
         >
           <div className="game">
             {winnerNode}
-            <h1 className="game-heading">Draw</h1>
+            <h1 className="game-heading">Odds.cool Lottery Machine</h1>
             <div className="game-board">
+              <h2 className="game__subheading">Draw</h2>
               <Board
                 Balls={current.Balls}
                 onClick={i => this.handleClick(i)}
@@ -178,17 +179,24 @@ class App extends Component {
               />
             </div>
             <Teams {...current} />
-            <nav className="game-info">
-              <h2 className="game-info__heading">Game Stage</h2>
-              <ol className="game-info__list">
+            <nav className="game-stage">
+              <h2 className="game-stage__heading">Game Stage</h2>
+              <ol className="game-stage__list">
                 {moves}
               </ol>
             </nav>
             <nav className="game-controls">
-              {this.state.stepNumber
-                ? <Undo onClick={() => this.handleUndo()} />
-                : null}
-              <Restart onClick={() => this.restartGame()} />
+              <h2 className="game-controls__heading">Options</h2>
+              <ul className="game-controls__list">
+                {this.state.stepNumber
+                  ? <li className="game-controls__list">
+                      <Undo onClick={() => this.handleUndo()} />
+                    </li>
+                  : null}
+                <li className="game-controls__list">
+                  <Restart onClick={() => this.restartGame()} />
+                </li>
+              </ul>
             </nav>
           </div>
         </div>

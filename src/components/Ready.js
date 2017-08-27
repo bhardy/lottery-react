@@ -13,7 +13,11 @@ export default class Ready extends Component {
     return (
       <div className="ready">
         <ReadyHint percent={remainingPercent} teams={teams} />
-        <ReadyButton percent={remainingPercent} teams={teams} onClick={this.props.onClick} />
+        <ReadyButton
+          percent={remainingPercent}
+          teams={teams}
+          onClick={this.props.onClick}
+        />
       </div>
     )
   }
@@ -52,7 +56,7 @@ function ReadyHint (props) {
 function ReadyButton (props) {
   if (props.percent === 0 && props.teams > 1) {
     return (
-      <button className="ready-button" onClick={props.onClick}>
+      <button className="cool-button ready-button" onClick={props.onClick}>
         Ready
       </button>
     )

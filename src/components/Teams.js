@@ -51,6 +51,7 @@ export default class TeamList extends Component {
 
     return (
       <div className="teams">
+        <h2 className="game__subheading">Teams</h2>
         <ul className="team__list">
           {teamListItems}
         </ul>
