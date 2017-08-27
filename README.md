@@ -1,6 +1,13 @@
 # Weighted Lottery
 A simple web application to create a random weighted lottery.
 
+## TODO
+- UI to active history states and make it clear that you can't draw while in the past
+- ability to save team list
+- help tips / wizard
+- mobile styles
+- change 're-draw' treatment in team list
+
 ## Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
