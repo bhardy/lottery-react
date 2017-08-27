@@ -1,10 +1,6 @@
 import React, {Component} from 'react'
 import numeral from 'numeral'
 import slugify from '../helpers/slugify'
-
-// import classnames from 'classnames'
-
-import '../css/Setup.css'
 import '../css/AddTeams.css'
 
 class TeamListItem extends Component {

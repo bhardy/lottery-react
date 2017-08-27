@@ -1,30 +1,22 @@
 import React, {Component} from 'react'
 import {find, cloneDeep, reject} from 'lodash'
-import classnames from 'classnames'
-import Board from './Board'
-import Winner from './Winner'
-import AddTeams from './AddTeams'
-import Ready from './Ready'
-import Teams from './Teams'
-import Undo from './Undo'
-import Restart from './Restart'
+import Game from './Game'
+import Setup from './Setup'
 import createTeams from '../helpers/createTeams'
 import slugify from '../helpers/slugify'
-
-import '../css/App.css'
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
-      // teams: [],
+      teams: [],
       // Debug Set
-      teams: [
-        {name: 'dustin', percent: 500},
-        {name: 'derrick', percent: 400},
-        {name: 'darlisa', percent: 70},
-        {name: 'brant', percent: 30}
-      ],
+      // teams: [
+      //   {name: 'dustin', percent: 500},
+      //   {name: 'derrick', percent: 400},
+      //   {name: 'darlisa', percent: 70},
+      //   {name: 'brant', percent: 30}
+      // ],
       setup: true,
       stepNumber: 0
     }
@@ -122,84 +114,23 @@ class App extends Component {
   render () {
     if (this.state.setup) {
       return (
-        <div className="site-content">
-          <div className="setup">
-            <h1>Setup</h1>
-            <AddTeams
-              Teams={this.state.teams}
-              addTeam={e => this.addTeam(e)}
-              removeTeam={e => this.removeTeam(e)}
-            />
-            <Ready Teams={this.state.teams} onClick={() => this.startGame()} />
-          </div>
-        </div>
+        <Setup
+          teams={this.state.teams}
+          addTeam={team => this.addTeam(team)}
+          removeTeam={team => this.removeTeam(team)}
+          startGame={() => this.startGame()}
+        />
       )
     } else {
-      const history = this.state.history
-      const current = history[this.state.stepNumber]
-
-      const moves = history.map((step, move) => {
-        const desc = move ? 'Pull #' + move : 'Game start'
-        return (
-          <li className="game-stage__list-item" key={move}>
-            <button
-              className="cool-button game-stage__button"
-              onClick={() => this.jumpTo(move)}
-            >
-              {desc}
-            </button>
-          </li>
-        )
-      })
-
-      let winnerNode
-      if (this.state.stepNumber === 4) {
-        winnerNode = (
-          <Winner name={find(current.teams, t => t.percent === 1000).name} />
-        )
-      }
-
       return (
-        <div
-          className={classnames('site-content', {
-            'site-content--game': !this.state.setup
-          })}
-        >
-          <div className="game">
-            {winnerNode}
-            <h1 className="game-heading">Odds.cool Lottery Machine</h1>
-            <div className="game-board">
-              <h2 className="game__subheading">Draw</h2>
-              <Board
-                Balls={current.Balls}
-                onClick={i => this.handleClick(i)}
-                disableAll={
-                  this.state.stepNumber < this.state.history.length - 1
-                }
-              />
-            </div>
-            <Teams {...current} />
-            <nav className="game-stage">
-              <h2 className="game-stage__heading">Game Stage</h2>
-              <ol className="game-stage__list">
-                {moves}
-              </ol>
-            </nav>
-            <nav className="game-controls">
-              <h2 className="game-controls__heading">Options</h2>
-              <ul className="game-controls__list">
-                {this.state.stepNumber
-                  ? <li className="game-controls__list">
-                      <Undo onClick={() => this.handleUndo()} />
-                    </li>
-                  : null}
-                <li className="game-controls__list">
-                  <Restart onClick={() => this.restartGame()} />
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
+        <Game
+          history={this.state.history}
+          stepNumber={this.state.stepNumber}
+          handleClick={i => this.handleClick(i)}
+          handleUndo={() => this.handleUndo()}
+          restartGame={() => this.restartGame()}
+          jumpTo={step => this.jumpTo(step)}
+        />
       )
     }
   }

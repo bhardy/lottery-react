@@ -1,3 +1,44 @@
+/* Global Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: var(--black);
+  background-color: var(--white);
+
+  --white: #ffffff;
+  --black: #111111;
+  --blue: #0074d9;
+  --red: #ff4136;
+  --gold: #ffdc00;
+  --orange: #ff851b;
+  --input-padding: 0.7rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+}
+
+input:focus {
+  outline: 2px solid var(--orange);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* Layout styles */
 .site {
   display: flex;
   flex-direction: column;
@@ -16,93 +57,32 @@
   background-color: var(--blue);
 }
 
-/* These should be in a new file! */
-.game {
+/* Buttons */
+
+.cool-button {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-  width: 100%;
-  max-width: 1600px;
-  padding: 30px 50px;
-  margin: 5%;
-  overflow: hidden;
-  background-color: var(--white);
+  padding: var(--input-padding) calc(var(--input-padding) * 2);
+  font-weight: normal;
+  color: white;
+  background-color: var(--blue);
+  box-shadow: 3px 4px var(--black);
 }
 
-.game-heading {
-  grid-column: 1 / span 12;
-  grid-row: 1;
-  color: var(--orange);
-  text-align: center;
+.cool-button:hover,
+.cool-button:focus {
+  top: 1px;
+  left: 1px;
+  box-shadow: 2px 3px var(--black);
 }
 
-.game-board {
-  grid-column: 1 / span 8;
-  grid-row: 2;
+.cool-button:focus {
+  outline: 2px solid var(--orange);
+  outline-offset: -2px;
 }
 
-.teams {
-  grid-column: 10 / span 3;
-  grid-row: 2;
-}
-
-.game-stage {
-  display: grid;
-  grid-column: 1 / span 8;
-  grid-row: 3;
-  margin-top: 20px;
-}
-
-.game-stage__heading {
-  grid-column: 1 / span 12;
-  grid-row: 1;
-}
-
-.game-stage__list {
-  grid-column: 1 / span 8;
-  grid-row: 2;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-.game-stage__list-item {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.game-stage__button.cool-button {
-  color: var(--black);
-  background-color: var(--gold);
-}
-
-.game-controls {
-  grid-column: 10 / span 3;
-  grid-row: 3;
-  align-self: end;
-}
-
-.game-controls__heading {
-}
-
-.game-controls__list {
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-.game-undo.cool-button {
-  margin-right: 20px;
-  background-color: var(--orange);
-}
-
-.game-undo.cool-button:focus {
-  outline-color: var(--red);
-}
-
-.game-restart.cool-button {
-  background-color: var(--red);
+.cool-button:active {
+  top: 2px;
+  left: 3px;
+  outline: 0;
+  box-shadow: 1px 2px var(--black);
 }
