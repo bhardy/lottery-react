@@ -11,4 +11,5 @@
 
 .winner__heading {
   font-size: 100px;
+  text-transform: capitalize;
 }
