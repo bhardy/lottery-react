@@ -83,7 +83,7 @@ class AddTeam extends Component {
             required
           />
         </label>
-        <button className="add-teams__submit" type="submit">
+        <button className="cool-button add-teams__submit" type="submit">
           Add Team
         </button>
       </form>

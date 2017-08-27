@@ -20,12 +20,5 @@
   margin-bottom: 10px;
 }
 
-.ready-button {
-  padding: var(--input-padding) calc(var(--input-padding) * 2);
-  font-weight: normal;
-  color: white;
-  background-color: var(--blue);
-  border-right: 3px solid;
-  border-bottom: 4px solid;
-  border-color: var(--black);
+.cool-button.ready-button {
 }
