@@ -5,6 +5,12 @@
   padding: 0;
   margin: 0;
   list-style-type: none;
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.ball__list--disabled {
+  opacity: 0.5;
 }
 
 .ball__list-item {
@@ -35,6 +41,10 @@
 
 .ball__label:not(.ball__label--active) {
   cursor: pointer;
+}
+
+.ball__list--disabled .ball__label {
+  cursor: not-allowed;
 }
 
 .ball__label--active {

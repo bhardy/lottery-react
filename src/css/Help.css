@@ -1,0 +1,20 @@
+.help-content {
+  background-color: var(--gold);
+}
+
+.help__container {
+  max-width: 1600px;
+  padding: 30px 50px;
+  margin: 5%;
+  color: var(--blue);
+  background-color: var(--white);
+}
+
+.help__main-description {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.help-steps__list > li {
+  margin-bottom: 15px;
+}

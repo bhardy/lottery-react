@@ -45,6 +45,12 @@ input:focus {
   min-height: 100vh;
 }
 
+.site-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
 .site-content {
   display: flex;
   align-items: center;

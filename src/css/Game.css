@@ -12,26 +12,24 @@
 }
 
 .game-heading {
-  grid-column: 1 / span 12;
-  grid-row: 1;
   color: var(--orange);
   text-align: center;
 }
 
 .game-board {
   grid-column: 1 / span 8;
-  grid-row: 2;
+  grid-row: 1;
 }
 
 .teams {
   grid-column: 10 / span 3;
-  grid-row: 2;
+  grid-row: 1;
 }
 
 .game-stage {
   display: grid;
   grid-column: 1 / span 8;
-  grid-row: 3;
+  grid-row: 2;
   margin-top: 20px;
 }
 
@@ -53,14 +51,19 @@
   margin-right: 20px;
 }
 
-.game-stage__button.cool-button {
+.cool-button.game-stage__button {
   color: var(--black);
   background-color: var(--gold);
 }
 
+.cool-button.game-stage__button.game-stage__button--active {
+  color: var(--white);
+  background-color: var(--blue);
+}
+
 .game-controls {
   grid-column: 10 / span 3;
-  grid-row: 3;
+  grid-row: 2;
   align-self: end;
 }
 

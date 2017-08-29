@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {find, cloneDeep, reject} from 'lodash'
+import Footer from './Footer'
 import Game from './Game'
+import Header from './Header'
+import Help from './Help'
 import Setup from './Setup'
 import createTeams from '../helpers/createTeams'
 import slugify from '../helpers/slugify'
@@ -9,14 +12,10 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      teams: [],
-      // Debug Set
-      // teams: [
-      //   {name: 'dustin', percent: 500},
-      //   {name: 'derrick', percent: 400},
-      //   {name: 'darlisa', percent: 70},
-      //   {name: 'brant', percent: 30}
-      // ],
+      teams: localStorage.getItem('teams')
+        ? JSON.parse(localStorage.getItem('teams'))
+        : [],
+      help: false,
       setup: true,
       stepNumber: 0
     }
@@ -78,6 +77,7 @@ class App extends Component {
       this.setState({
         teams: [...teams, team]
       })
+      localStorage.setItem('teams', JSON.stringify([...teams, team]))
     }
   }
 
@@ -111,26 +111,54 @@ class App extends Component {
     })
   }
 
+  toggleHelp () {
+    this.setState({
+      help: !this.state.help
+    })
+  }
+
   render () {
-    if (this.state.setup) {
+    if (this.state.help) {
       return (
-        <Setup
-          teams={this.state.teams}
-          addTeam={team => this.addTeam(team)}
-          removeTeam={team => this.removeTeam(team)}
-          startGame={() => this.startGame()}
-        />
+        <main className="site">
+          <Header onClick={() => this.toggleHelp()} help={this.state.help} />
+          <div className="site-content help-content">
+            <Help />
+          </div>
+          <Footer />
+        </main>
+      )
+    } else if (this.state.setup) {
+      return (
+        <main className="site">
+          <Header onClick={() => this.toggleHelp()} help={this.state.help} />
+          <div className="site-content">
+            <Setup
+              teams={this.state.teams}
+              addTeam={team => this.addTeam(team)}
+              removeTeam={team => this.removeTeam(team)}
+              startGame={() => this.startGame()}
+            />
+          </div>
+          <Footer />
+        </main>
       )
     } else {
       return (
-        <Game
-          history={this.state.history}
-          stepNumber={this.state.stepNumber}
-          handleClick={i => this.handleClick(i)}
-          handleUndo={() => this.handleUndo()}
-          restartGame={() => this.restartGame()}
-          jumpTo={step => this.jumpTo(step)}
-        />
+        <main className="site">
+          <Header onClick={() => this.toggleHelp()} help={this.state.help} />
+          <div className="site-content site-content--game">
+            <Game
+              history={this.state.history}
+              stepNumber={this.state.stepNumber}
+              handleClick={i => this.handleClick(i)}
+              handleUndo={() => this.handleUndo()}
+              restartGame={() => this.restartGame()}
+              jumpTo={step => this.jumpTo(step)}
+            />
+          </div>
+          <Footer />
+        </main>
       )
     }
   }
