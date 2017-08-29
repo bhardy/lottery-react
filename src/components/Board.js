@@ -44,7 +44,11 @@ export default class Board extends Component {
     )
 
     return (
-      <ol className="ball__list">
+      <ol
+        className={classnames('ball__list', {
+          'ball__list--disabled': this.props.disableAll
+        })}
+      >
         {listItems}
       </ol>
     )

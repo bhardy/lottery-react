@@ -1,0 +1,43 @@
+.header,
+.header__help-button {
+  animation-direction: alternate;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-name: warmcolors;
+}
+
+.header {
+  background-color: var(--white);
+}
+
+.header__help-button {
+  margin-left: 20px;
+  color: var(--white);
+  border-right: 2px solid;
+  border-bottom: 3px solid;
+}
+
+.header__help-button:hover {
+  animation-duration: 400ms;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-name: helphover;
+}
+
+@keyframes warmcolors {
+  0% {
+    color: var(--red);
+  }
+  100% {
+    color: var(--orange);
+  }
+}
+
+@keyframes helphover {
+  0% {
+    color: var(--red);
+  }
+  100% {
+    color: var(--blue);
+  }
+}

@@ -1,0 +1,12 @@
+.site-footer {
+  padding-top: 20px;
+  padding-bottom: 15px;
+  margin-right: 5%;
+  margin-left: 5%;
+  color: var(--orange);
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--blue);
+}
