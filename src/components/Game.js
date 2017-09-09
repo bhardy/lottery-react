@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import {find} from 'lodash'
-import classnames from 'classnames'
 import Board from './Board'
-import Restart from './Restart'
 import Teams from './Teams'
-import Undo from './Undo'
 import Winner from './Winner'
+import Moves from './Moves'
 import '../css/Game.css'
 
 export default class Game extends Component {
@@ -13,22 +11,6 @@ export default class Game extends Component {
     const history = this.props.history
     const stepNumber = this.props.stepNumber
     const current = history[stepNumber]
-
-    const moves = history.map((step, move) => {
-      const desc = move ? 'Pull #' + move : 'Game start'
-      return (
-        <li className="game-stage__list-item" key={move}>
-          <button
-            className={classnames('cool-button game-stage__button', {
-              'game-stage__button--active': stepNumber === move
-            })}
-            onClick={() => this.props.jumpTo(move)}
-          >
-            {desc}
-          </button>
-        </li>
-      )
-    })
 
     let winnerNode
     if (this.props.stepNumber === 4) {
@@ -51,20 +33,32 @@ export default class Game extends Component {
         <Teams {...current} />
         <nav className="game-stage">
           <h2 className="game-stage__heading">Game Stage</h2>
-          <ol className="game-stage__list">
-            {moves}
-          </ol>
+          <Moves
+            stepNumber={this.props.stepNumber}
+            history={this.props.history}
+            jumpTo={this.props.jumpTo}
+          />
         </nav>
         <nav className="game-controls">
           <h2 className="game-controls__heading">Options</h2>
           <ul className="game-controls__list">
-            {this.props.stepNumber
-              ? <li className="game-controls__list">
-                  <Undo onClick={() => this.props.handleUndo()} />
-                </li>
-              : null}
+            {this.props.stepNumber ? (
+              <li className="game-controls__list">
+                <button
+                  className="game-undo cool-button"
+                  onClick={() => this.props.handleUndo()}
+                >
+                  Undo Draw
+                </button>
+              </li>
+            ) : null}
             <li className="game-controls__list">
-              <Restart onClick={() => this.props.restartGame()} />
+              <button
+                className="game-restart cool-button"
+                onClick={() => this.props.restartGame()}
+              >
+                Change Teams
+              </button>
             </li>
           </ul>
         </nav>
