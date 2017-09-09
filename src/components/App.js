@@ -84,6 +84,7 @@ class App extends Component {
       teams: teams,
       totalPercent: sumBy(teams, 'percent')
     })
+    localStorage.setItem('teams', JSON.stringify(teams))
   }
 
   startGame () {
