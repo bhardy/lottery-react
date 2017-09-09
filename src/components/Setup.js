@@ -12,10 +12,12 @@ export default class Setup extends Component {
           Teams={this.props.teams}
           addTeam={e => this.props.addTeam(e)}
           removeTeam={e => this.props.removeTeam(e)}
+          totalPercent={this.props.totalPercent}
         />
         <Ready
           Teams={this.props.teams}
           onClick={() => this.props.startGame()}
+          totalPercent={this.props.totalPercent}
         />
       </section>
     )

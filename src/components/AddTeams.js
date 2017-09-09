@@ -4,19 +4,10 @@ import slugify from '../helpers/slugify'
 import '../css/AddTeams.css'
 
 class TeamListItem extends Component {
-  constructor () {
-    super()
-    this.state = {
-      remainingPercent: 100
-    }
-  }
-
   render () {
     return (
       <li className="add-teams__list-item">
-        <span className="add-teams__team-name">
-          {this.props.name}
-        </span>
+        <span className="add-teams__team-name">{this.props.name}</span>
         <span className="add-teams__team-percent">
           {numeral(this.props.percent / 1000).format('0.0%')}
         </span>
@@ -50,6 +41,10 @@ class AddTeam extends Component {
   }
 
   render () {
+    let addDisabled = false
+    if (this.props.totalPercent >= 1000) {
+      addDisabled = true
+    }
     return (
       <form
         className="add-teams__form"
@@ -79,7 +74,11 @@ class AddTeam extends Component {
             required
           />
         </label>
-        <button className="cool-button add-teams__submit" type="submit">
+        <button
+          disabled={addDisabled}
+          className="cool-button add-teams__submit"
+          type="submit"
+        >
           Add Team
         </button>
       </form>
@@ -91,21 +90,24 @@ export default class AddTeams extends Component {
   render () {
     let teams = this.props.Teams
 
-    const teamListItems = teams.map(team =>
+    const teamListItems = teams.map(team => (
       <TeamListItem
         name={team.name}
         percent={team.percent}
         key={slugify(team.name)}
         remove={this.props.removeTeam}
       />
-    )
+    ))
 
     return (
       <div className="create-teams">
         <ul className="add-teams__list">
           {teamListItems.length > 0 ? teamListItems : <Empty />}
         </ul>
-        <AddTeam onSubmit={this.props.addTeam} />
+        <AddTeam
+          totalPercent={this.props.totalPercent}
+          onSubmit={this.props.addTeam}
+        />
       </div>
     )
   }

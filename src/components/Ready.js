@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
-import {sumBy} from 'lodash'
 
 import '../css/Ready.css'
 
 export default class Ready extends Component {
   render () {
-    const totalPercent = sumBy(this.props.Teams, 'percent')
-    const percentGoal = 1000
-    const remainingPercent = (percentGoal - totalPercent) / 10
+    const remainingPercent = (1000 - this.props.totalPercent) / 10
     const teams = this.props.Teams.length
 
     return (
@@ -40,17 +37,13 @@ function ReadyHint (props) {
     hints.push(`You're over by ${Math.abs(props.percent)}%.`)
   }
 
-  const hintListItems = hints.map((hint, index) =>
+  const hintListItems = hints.map((hint, index) => (
     <li className="ready-hint__list-item" key={index}>
       {hint}
     </li>
-  )
+  ))
 
-  return (
-    <ol className="ready-hint__list">
-      {hintListItems}
-    </ol>
-  )
+  return <ol className="ready-hint__list">{hintListItems}</ol>
 }
 
 function ReadyButton (props) {
