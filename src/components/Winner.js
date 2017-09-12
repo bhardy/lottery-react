@@ -6,9 +6,7 @@ class Winner extends Component {
   render () {
     return (
       <div className="winner">
-        <h2 className="winner__heading">
-          {this.props.name}
-        </h2>
+        <h2 className="winner__heading">{this.props.name}</h2>
         <Confetti style={{top: '-1px'}} />
       </div>
     )

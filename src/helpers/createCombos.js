@@ -1,5 +1,5 @@
-import combinations from './combinations'
 import {shuffle} from 'lodash'
+import combinations from './combinations'
 
 export default function createTeams () {
   const teams = [
@@ -41,7 +41,9 @@ export default function createTeams () {
     }
   ]
 
-  const combos = shuffle(combinations([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 4))
+  const combos = shuffle(
+    combinations([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 4)
+  )
 
   for (let team of teams) {
     team.combos = []
