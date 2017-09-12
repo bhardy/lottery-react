@@ -1,5 +1,5 @@
-import combinations from './combinations'
 import {reduce, shuffle, orderBy} from 'lodash'
+import combinations from './combinations'
 
 export default function createTeams (teams) {
   let total = reduce(
@@ -11,7 +11,7 @@ export default function createTeams (teams) {
   )
 
   if (total === 1000) {
-    teams.push({name: 're-draw', percent: 1})
+    teams = [...teams, {name: 're-draw', percent: 1}]
     const combos = shuffle(
       combinations([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 4)
     )

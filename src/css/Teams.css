@@ -62,3 +62,11 @@
   color: var(--red);
   content: '×';
 }
+
+.team__list-item--redraw {
+  color: var(--orange);
+}
+
+.team__list-item--redraw:hover {
+  cursor: default;
+}
